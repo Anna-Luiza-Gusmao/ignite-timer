@@ -20,4 +20,5 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 📚 Bibliotecas
 
-- 
+- Phosphor React
+- Styled Components
