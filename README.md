@@ -22,3 +22,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - Phosphor React
 - Styled Components
+- React Hook Form
+- React Router Dom
+- Zod
+- Date Fns
