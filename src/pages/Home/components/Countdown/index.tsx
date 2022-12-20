@@ -1,4 +1,4 @@
-import { CyclesContext } from '../../Home';
+import { CyclesContext } from '../../../../contexts/CyclesContext'
 import { CountdownContainer, Separator } from './styles'
 import { useEffect, useContext } from 'react'
 import { differenceInSeconds } from 'date-fns'
