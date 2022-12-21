@@ -40,34 +40,45 @@ interface CyclesState {
 
 export function CyclesContextProvider({ children }: CyclesContextProviderProps) {
     const [cyclesState, dispatch] = useReducer((state: CyclesState, action: any) => {
-        if(action.type === 'ADD_NEW_CYCLE'){
-            return {
-                ...state,
-                cycles: [...state.cycles, action.payload.newCycle],
-                activeCycleId: action.payload.newCycle.id
-            };
+        switch(action.tipe) {
+            case 'ADD_NEW_CYCLE':
+                return {
+                    ...state,
+                    cycles: [...state.cycles, action.payload.newCycle],
+                    activeCycleId: action.payload.newCycle.id
+                };
+            case 'INTERRUPTED_CURRENT_CYCLE':
+                return {
+                    ...state,
+                    cycles: state.cycles.map((cylcle) => {
+                        if(cylcle.id === state.activeCycleId) {
+                            return { ...cylcle, interruptedDate: new Date() }
+                        }else {
+                            return cylcle
+                        }
+                    }),
+                    activeCycleId: null
+                };
+            case 'MARK_CURRENT_CYCLE_AS_FINISHED':
+                return {
+                    ...state,
+                    cycles: state.cycles.map((cylcle) => {
+                        if(cylcle.id === state.activeCycleId) {
+                            return { ...cylcle, finishedDate: new Date() }
+                        }else {
+                            return cylcle
+                        }
+                    }),
+                    activeCycleId: null
+                };
+            case 'SET_ACTIVE_CYCLE_ID_NULL':
+                return {
+                    ...state,
+                    activeCycleId: null
+                };
+            default:
+                return state;
         }
-        if(action.type === 'INTERRUPTED_CURRENT_CYCLE'){
-            return {
-                ...state,
-                cycles: state.cycles.map((cylcle) => {
-                    if(cylcle.id === state.activeCycleId) {
-                        return { ...cylcle, interruptedDate: new Date() }
-                    }else {
-                        return cylcle
-                    }
-                }),
-                activeCycleId: null
-            };
-        }
-        if(action.type === 'SET_ACTIVE_CYCLE_ID_NULL'){
-            return {
-                ...state,
-                activeCycleId: null
-            };
-        }
-
-        return state;
     }, {
         cycles: [],
         activeCycleId: null
