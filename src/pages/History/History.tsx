@@ -5,7 +5,7 @@ import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 
 export function History () {
-    const { cycle } = useContext(CyclesContext);
+    const { cycles } = useContext(CyclesContext);
 
     return (
         <HistoryContainer>
@@ -23,7 +23,7 @@ export function History () {
                     </thead>
                     <tbody>
                         {
-                            cycle.map((cycle) => {
+                            cycles.map((cycle) => {
                                 return (
                                     <tr key={cycle.id}>
                                         <td>{cycle.task}</td>
